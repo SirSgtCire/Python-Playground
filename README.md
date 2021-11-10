@@ -2,7 +2,8 @@
 Fun environment for throwing Python code at the wall.
 
 # Setting up Environments
-1. create virtual environment: `python -m venv <name_of_module>`
+0. navigate to root of Python-Playground
+1. create virtual environment: `python -m venv Venvs/<name_of_module>`
 2. cd into `<name_of_module>/Scripts` and run `. activate` to enable
 3. cd back to working directory
 4. upgrade pip and setup tools: `pip install -U pip setuptools`
