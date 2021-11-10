@@ -128,5 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Python Venv
-.Imaghur-Env
+# Python Virtual Environments
+Venvs
