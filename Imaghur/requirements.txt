@@ -1,0 +1,5 @@
+jedi==0.18.0
+parso==0.8.2
+Pillow==8.4.0
+opencv-python==4.5.4.58
+matplotlib==3.4.3
