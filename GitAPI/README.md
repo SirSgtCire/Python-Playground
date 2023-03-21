@@ -1,4 +1,4 @@
-# QA GitMetrics Tool
+# GitAPI - QA GitMetrics Tool
 
 ## Overview
 
@@ -20,19 +20,14 @@ requirements.
 ## Installation
 
 1. Install all external requirements posted above.
-2. Clone the repository: `git clone https://github.rp-core.com/QA/GitMetrics.git`
-    * OR download the zip [`from Github`](https://github.rp-core.com/QA/GitMetrics)
-3. Generate your own virtual environment using venv:
-    1. Create an env directory: `python3 -m venv name-of-venv`
-    2. `cd` into the project and activate the venv: `source ~/name-of-venv/bin/activate`
-    3. Install dependencies inside your venv: `~/name-of-venv/bin/pip install -r requirements.txt`
-    4. If you need to kill the venv, or when done running the project: `deactivate`
-4. Run the application: `python Metrics.py --startdate "[year, month, day]" --enddate "[year, month, day]"`
+2. Clone the repository
+3. Generate your own virtual environment using venv, following the readme for Python-Playground
+4. Run the application: `python3 Metrics.py --startdate "[year, month, day]" --enddate "[year, month, day]"`
 
 NOTE: The function uses a `default.json` config file on invoking the code as
 listed above. If you want to run the metrics function on a specific set of repos,
 then make your own json config file to load and give it as input:
-`python Main.py --cfgfile your_cfg_file.json --startdate "[year, month, day]" --enddate "[year, month, day]"`
+`python3 Metrics.py --cfgfile your_cfg_file.json --startdate "[year, month, day]" --enddate "[year, month, day]"`
 
 ## Usage
 
@@ -59,9 +54,8 @@ the authenticator can use. For more info, follow the [online Github documentatio
 
 ## Automation
 
-There is a Jenkins job that runs this script, which means anyone can run the
-metrics project without having to download and configure the project. That script
-can be found on [this Jenkins host](https://e2e-build.las4.fanops.net/job/GitMetrics/).
+This module can be run on Jenkins using the jenkins-run.sh provided. If configured correctly, 
+Jenkins can handle the scheduled runs of this project, given proper configuration.
 
 Another thing to note is that the Jenkins job takes a `userconf.py` file as one
 of its parameters, meaning that after you have created your own file when running
