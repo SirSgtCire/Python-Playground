@@ -21,17 +21,13 @@ requirements.
 
 1. Install all external requirements posted above.
 2. Clone the repository
-3. Generate your own virtual environment using venv:
-    1. Create an env directory: `python3 -m venv name-of-venv`
-    2. `cd` into the project and activate the venv: `source ~/name-of-venv/bin/activate`
-    3. Install dependencies inside your venv: `~/name-of-venv/bin/pip install -r requirements.txt`
-    4. If you need to kill the venv, or when done running the project: `deactivate`
-4. Run the application: `python3 Metrics.py --startdate "[year, month, day]" --enddate "[year, month, day]"`
+3. Generate your own virtual environment using venv, following the readme for Python-Playground
+4. Run the application: `python3 main.py"`
 
 NOTE: The function uses a `default.json` config file on invoking the code as
 listed above. If you want to run the metrics function on a specific set of repos,
 then make your own json config file to load and give it as input:
-`python3 Metrics.py --cfgfile your_cfg_file.json --startdate "[year, month, day]" --enddate "[year, month, day]"`
+`python3 main.py --cfgfile your_cfg_file.json"`
 
 ## Usage
 

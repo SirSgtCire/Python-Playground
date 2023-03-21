@@ -10,5 +10,7 @@ Fun environment for throwing Python code at the wall.
 5. when done using venv, run `deactivate`
 
 # Using the Modules
+To run the installed module, invoke its main.py:
+`python3 <name_of_module>/main.py`
 For additional information on each module, run each module's help script:
 `python3 <name_of_module>/help.py`
