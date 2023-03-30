@@ -6,7 +6,7 @@ import pytest
 import urllib3
 import appconf
 import argparse
-import seleniumtest
+import test_selenium
 
 
 def __main__():
@@ -29,7 +29,7 @@ def get_cmd_line_args():
 
 def run_selenium_tests():
     print("Running dedicated suite of tests for Selenium UI")
-    seleniumtest.browser_check()
+    test_selenium.browser_check()
 
 
 if __name__ == "__main__":

@@ -14,7 +14,8 @@ from webdriver_manager.opera import OperaDriverManager
 import appconf
 import os
 
-def browser_check():
+
+def test_browser_check():
     # Define the custom path
     custom_path = appconf.driver_location
     if not os.path.exists(custom_path):
@@ -47,19 +48,19 @@ def browser_check():
         # Launch browser and validate installation
         driver.get(test_url)
         print(driver.title)
+        assert(driver.title is not None)
         driver.quit()
 
 
 def locate_file(dir_path, file_name):
     # Walk through the directory and find the file
-    file_path = ""
     for root, dirs, files in os.walk(dir_path):
         if file_name in files:
             # File found
             file_path = os.path.join(root, file_name)
             print(f"File found at: {file_path}")
-            break
+            return file_path
     else:
         # File not found
         print(f"File '{file_name}' not found in directory '{dir_path}'")
-    return file_path
+    return "Error"
