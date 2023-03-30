@@ -1,5 +1,5 @@
 # Main file for running test strategies
-# make sure to do imports here
+import csv
 import os
 import sys
 import pytest
@@ -8,10 +8,16 @@ import appconf
 import argparse
 import seleniumtest
 
+
 def __main__():
-	# Run all necessary functions here
-	print("Welcome to Quality Assurance Strategies")
-	# Run Selenium Tests
+    print("Welcome to Quality Assurance Strategies")
+    # Initialize project
+    config = get_cmd_line_args()
+    appconf.load(config)
+    # Run Selenium Tests
+    run_selenium_tests()
+    # TODO: Run Other Tests
+
 
 def get_cmd_line_args():
     parser = argparse.ArgumentParser(description='Parser for loading in command line parameters')
@@ -19,3 +25,12 @@ def get_cmd_line_args():
                         help="Give the name of a valid config.json file you wish to load into the program.")
     result = parser.parse_args()
     return result.cfgfile
+
+
+def run_selenium_tests():
+    print("Running dedicated suite of tests for Selenium UI")
+    seleniumtest.browser_check()
+
+
+if __name__ == "__main__":
+    __main__()

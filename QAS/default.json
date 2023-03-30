@@ -1,0 +1,7 @@
+{
+  "google_home": "https://wwww.google.com",
+
+  "driver_location": "./web_drivers",
+
+  "supported_browsers": ["chrome", "chromium", "brave", "firefox", "ie", "edge", "opera", "safari"]
+}

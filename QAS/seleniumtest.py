@@ -1,5 +1,5 @@
 from selenium import webdriver
-from webdriver_manager.chrome.service import Service as ChromeService
+from selenium.webdriver.chrome.service import Service as ChromeService
 from selenium.webdriver.chrome.service import Service as BraveService
 from selenium.webdriver.chrome.service import Service as ChromiumService
 from webdriver_manager.chrome import ChromeDriverManager
@@ -11,45 +11,55 @@ from webdriver_manager.microsoft import IEDriverManager
 from selenium.webdriver.edge.service import Service as EdgeService
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
 from webdriver_manager.opera import OperaDriverManager
+import appconf
 import os
-import time
 
-test_url = "https://wwww.google.com"
+def browser_check():
+    # Define the custom path
+    custom_path = appconf.driver_location
+    if not os.path.exists(custom_path):
+        os.makedirs(custom_path)
 
-# Install web browser drivers
-chrome_driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
-chromium_driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(chrome_type=ChromeType.CHROMIUM).install()))
-brave_driver = webdriver.Chrome(service=BraveService(ChromeDriverManager(chrome_type=ChromeType.BRAVE).install()))
-firefox_driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager().install()))
-ie_driver = webdriver.Ie(service=IEService(IEDriverManager().install()))
-edge_driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager().install()))
-opera_driver = webdriver.Opera(executable_path=OperaDriverManager().install())
+    # Define variable names
+    test_url = appconf.google_home
+    browser_list = appconf.supported_browsers
 
-# Validate browser drivers installed successfully
-chrome_driver.get(test_url)
-print(chrome_driver.title)
-chrome_driver.quit()
+    # Install web browser drivers and launch each browser
+    for browser in browser_list:
+        if browser == "chrome":
+            driver = webdriver.Chrome(executable_path=locate_file(custom_path, "chromedriver"))
+        elif browser == "chromium":
+            driver = webdriver.Chrome(executable_path=locate_file(custom_path, "chromiumdriver"))
+        elif browser == "brave":
+            driver = webdriver.Chrome(executable_path=locate_file(custom_path, "bravedriver"))
+        elif browser == "firefox":
+            driver = webdriver.Firefox(executable_path=locate_file(custom_path, "geckodriver"))
+        elif browser == "ie":
+            driver = webdriver.Ie(executable_path=locate_file(custom_path, "iedriver"))
+        elif browser == "edge":
+            driver = webdriver.Edge(executable_path=locate_file(custom_path, "edgedriver"))
+        elif browser == "opera":
+            driver = webdriver.Opera(executable_path=locate_file(custom_path, "operadriver"))
+        else:
+            print(f"{browser} is not a supported browser")
+            continue
 
-chromium_driver.get(test_url)
-print(chromium_driver.title)
-chromium_driver.quit()
+        # Launch browser and validate installation
+        driver.get(test_url)
+        print(driver.title)
+        driver.quit()
 
-brave_driver.get(test_url)
-print(brave_driver.title)
-brave_driver.quit()
 
-firefox_driver.get(test_url)
-print(firefox_driver.title)
-firefox_driver.quit()
-
-ie_driver.get(test_url)
-print(ie_driver.title)
-ie_driver.quit()
-
-edge_driver.get(test_url)
-print(edge_driver.title)
-edge_driver.quit()
-
-opera_driver.get(test_url)
-print(opera_driver.title)
-opera_driver.quit()
+def locate_file(dir_path, file_name):
+    # Walk through the directory and find the file
+    file_path = ""
+    for root, dirs, files in os.walk(dir_path):
+        if file_name in files:
+            # File found
+            file_path = os.path.join(root, file_name)
+            print(f"File found at: {file_path}")
+            break
+    else:
+        # File not found
+        print(f"File '{file_name}' not found in directory '{dir_path}'")
+    return file_path
