@@ -29,7 +29,7 @@ def get_cmd_line_args():
 
 def run_selenium_tests():
     print("Running dedicated suite of tests for Selenium UI")
-    test_selenium.browser_check()
+    test_selenium.test_browser_check()
 
 
 if __name__ == "__main__":

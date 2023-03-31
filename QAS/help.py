@@ -8,4 +8,8 @@ There are multiple packages we need to use for comprehensive web testing, so we 
 that provides most of these tools to us prebuilt. 
 
 We use PyTest to structure our tests.
+
+We use webdriver-manager for Selenium.
+
+We use Requests for API.
 """)
