@@ -131,3 +131,7 @@ dmypy.json
 
 # Python Virtual Environments
 Venvs
+
+# QAS Reports and Drivers
+QAS/test_reports/
+QAS/web_drivers/
