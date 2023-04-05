@@ -21,7 +21,7 @@ def __main__():
 
 def get_cmd_line_args():
     parser = argparse.ArgumentParser(description='Parser for loading in command line parameters')
-    parser.add_argument('--cfgfile', action="store", dest="cfgfile", default="default.json",
+    parser.add_argument('--cfgfile', action="store", dest="cfgfile", default="QAS/default.json",
                         help="Give the name of a valid config.json file you wish to load into the program.")
     result = parser.parse_args()
     return result.cfgfile
@@ -30,6 +30,14 @@ def get_cmd_line_args():
 def run_selenium_tests():
     print("Running dedicated suite of tests for Selenium UI")
     test_selenium.test_browser_check()
+
+
+def find_file(filename, search_path):
+    print(f"Finding {filename} somewhere within {search_path}")
+    for root, dirs, files in os.walk(search_path):
+        if filename in files:
+            return os.path.join(root, filename)
+    return None
 
 
 if __name__ == "__main__":

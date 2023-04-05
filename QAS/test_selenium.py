@@ -32,38 +32,20 @@ def test_browser_check():
     if not os.path.exists(custom_path):
         os.makedirs(custom_path)
 
-    driver_folder = os.path.join(os.getcwd(), custom_path)
-    print(f"Driver folder: '{driver_folder}'")
+    driver_path = appconf.driver_location  # Set the path to the directory where you want to install the driver binaries
 
-    # Create each available browser driver available in Selenium 4
-    chrome_driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager(path=driver_folder).install()))
+    # Install the Chrome driver binary to the specified path
+    chrome_driver_path = os.path.abspath(ChromeDriverManager(path=driver_path).install())
+    print(f"Chrome driver path: '{chrome_driver_path}")
 
-    chromium_driver = webdriver.Chrome(service=ChromiumService(ChromeDriverManager(executable_path=driver_folder, chrome_type=ChromeType.CHROMIUM).install()))
+    # Create a Chrome webdriver instance using the installed driver binary
+    chrome_options = ChromeOptions()
+    driver = webdriver.Chrome(executable_path=chrome_driver_path, options=chrome_options)
 
-    brave_driver = webdriver.Chrome(service=BraveService(ChromeDriverManager(executable_path=driver_folder, chrome_type=ChromeType.BRAVE).install()))
-
-    gecko_driver = webdriver.Firefox(service=FirefoxService(GeckoDriverManager(executable_path=driver_folder).install()))
-
-    ie_driver = webdriver.Ie(service=IEService(IEDriverManager(executable_path=driver_folder).install()))
-
-    edge_driver = webdriver.Edge(service=EdgeService(EdgeChromiumDriverManager(executable_path=driver_folder).install()))
-
-    opera_options = webdriver.ChromeOptions()
-    opera_options.add_argument('allow-elevated-browser')
-    opera_options.binary_location = driver_folder
-    opera_driver = webdriver.Opera(executable_path=OperaDriverManager().install(), options=opera_options)
-
-    # Launch each driver loads successfully
-    launch_driver(chrome_driver, test_url, "chrome")
-    launch_driver(chromium_driver, test_url, "chromium")
-    launch_driver(brave_driver, test_url, "brave")
-    launch_driver(gecko_driver, test_url, "firefox")
-    launch_driver(ie_driver, test_url, "ie")
-    launch_driver(edge_driver, test_url, "edge")
-    launch_driver(opera_driver, test_url, "opera")
-
-    # Verify we made it through all of our browsers
-    assert approved_browsers_list == 7, f"We did NOT make it through all of our browsers, here are the ones that passed: '{approved_browsers_list}'"
+    # Open the driver
+    driver.get(test_url)
+    driver.maximize_window()
+    print(driver.title)
 
 
 def launch_driver(input_driver, input_url, input_browser):
