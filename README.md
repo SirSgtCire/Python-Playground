@@ -8,9 +8,7 @@ Fun environment for throwing Python code at the wall.
 3. upgrade pip and setup tools: `pip install -U pip setuptools`
 4. install module dependencies: `pip install -r <name_of_module>/requirements.txt`
 5. when done using venv, run `deactivate`
+6. to reset packages without deleting venv, run `pip uninstall -r <(grep -v -f requirements.txt <(pip freeze))`
 
 # Using the Modules
-To run the installed module, invoke its main.py:
-`python3 <name_of_module>/main.py`
-For additional information on each module, run each module's help script:
-`python3 <name_of_module>/help.py`
+TBD when in place

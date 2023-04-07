@@ -6,12 +6,12 @@
 1. Install all external requirements for QAS.
 2. Clone the repository and [install requirements](https://github.com/SirSgtCire/Python-Playground/blob/develop/QAS/requirements.txt)
 3. Generate your own virtual environment using venv, following the readme for Python-Playground
-4. Run the application with python3: `python3 QAS/main.py"` You can also run the project using pytest: `pytest -v"`
+4. Run the application with pytest: `pytest -s"`
 
 NOTE: The application uses a `default.json` config file on invoking the code as
 listed above. If you want to run the application with custom configuration,
 then make your own json config file to load and give it as input:
-`python3 QAS/main.py --cfgfile your_cfg_file.json"`
+`pytest -s --cfgfile your_cfg_file.json"`
 
 
 ## Automation Strategy
