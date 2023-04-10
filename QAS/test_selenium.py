@@ -1,5 +1,4 @@
 import appconf
-import tools
 
 import os
 import sys
@@ -16,44 +15,77 @@ from selenium.webdriver.firefox.service import Service as GeckoDriverService
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
 from webdriver_manager.microsoft import EdgeChromiumDriverManager
+import json
+import logging
 
 
-def test_browser():
-    # Specify the path where you want to save the Chrome webdriver
-    driver_path = tools.find_file("chromedriver", )
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.DEBUG)
 
-    # Download the Chrome webdriver to the specified path
-    if not os.path.isfile(driver_path):
-        print('Downloading Chrome webdriver...')
-        driver_url = 'https://chromedriver.storage.googleapis.com/LATEST_RELEASE'
-        response = requests.get(driver_url)
-        version_number = response.text.strip()
-        if sys.platform.startswith('win'):
-            driver_filename = 'chromedriver.exe'
-        else:
-            driver_filename = 'chromedriver'
-        updated_driver_url = f'https://chromedriver.storage.googleapis.com/{version_number}/{driver_filename}'
-        response = requests.get(updated_driver_url)
-        with open(driver_path, 'wb') as f:
-            f.write(response.content)
 
-    # Set up the Chrome webdriver service
-    service = Service(driver_path)
-    service.start()
+def find_file(filename):
+    for root, dirs, files in os.walk(os.getcwd()):
+        if filename in files:
+            return os.path.join(root, filename)
+    raise ValueError(f"{filename} not found in directory tree")
 
-    # Open a new Chrome browser window
+
+@pytest.fixture(scope="session")
+def chrome_driver():
+    # Use Chrome driver
     options = webdriver.ChromeOptions()
-    options.add_argument('--start-maximized')
-    driver = webdriver.Chrome(service=service, options=options)
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    options.binary_location = find_file("chromedriver")
+    driver_path = ChromeDriverManager().install()
+    service = Service(executable_path=driver_path)
+    driver = webdriver.Chrome(options=options, service=service)
 
+    yield driver
+
+    driver.quit()
+
+
+def test_config():
+    # Open the configuration file and verify each necessary parameter for the tests in this file is present.
+    config_file = "default.json"
+    appconf.load(config_file)
+    with open(config_file, "r") as f:
+        config_blob = json.load(f)
+        for key, value in config_blob.items():
+            logger.debug("Do we make it here, and what do we get? %s, %s...", key, value)
+        assert config_blob["google_home"] == appconf.google_home
+        assert config_blob["driver_location"] == appconf.driver_location
+        assert config_blob["report_location"] == appconf.report_location
+
+
+def test_create_folders():
+    # Ensure all subdirectories needed for this file are created.
+    # Check if directory already exists
+    if not os.path.exists(appconf.driver_location):
+        # Create directory and log creation time
+        os.makedirs(appconf.driver_location)
+        logger.debug("Directory created successfully!")
+    else:
+        logger.debug("Directory already exists!")
+
+    # Check if directory already exists
+    if not os.path.exists(appconf.report_location):
+        # Create directory and log creation time
+        os.makedirs(appconf.report_location)
+        logger.debug("Directory created successfully!")
+    else:
+        logger.debug("Directory already exists!")
+
+    # Verify folder creation separately from actual creation
+    assert os.path.exists(appconf.driver_location)
+    assert os.path.exists(appconf.report_location)
+
+
+def test_browser(chrome_driver):
     # Navigate to Google
-    driver.get('https://www.google.com')
-
-    # Wait for the page to load
-    time.sleep(3)
+    chrome_driver.get(appconf.google_home)
 
     # Check that the page title is "Google"
-    assert driver.title == 'Google'
-
-    # Close the Chrome browser window
-    driver.quit()
+    assert chrome_driver.title == 'Google'

@@ -1,7 +1,7 @@
 {
-  "google_home": "https://wwww.google.com",
+  "google_home": "https://www.google.com",
 
-  "driver_location": "QAS/web_drivers",
+  "driver_location": "web_drivers",
 
-  "supported_browsers": ["chrome", "firefox", "ie", "edge", "safari"]
+  "report_location": "test_reports"
 }
