@@ -11,4 +11,17 @@ Fun environment for throwing Python code at the wall.
 6. to reset packages without deleting venv, run `pip uninstall -r <(grep -v -f requirements.txt <(pip freeze))`
 
 # Using the Modules
-TBD when in place
+1. run `source Venvs/<name_of_module>/bin/activate` to enable new venv
+2. when done using venv, run `deactivate`
+
+# Description of each existing Module:
+## GitAPI
+
+
+## Imaghur
+
+
+## PythonManuscripts
+
+
+## QAS
