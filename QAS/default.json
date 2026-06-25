@@ -1,0 +1,7 @@
+{
+  "google_home": "https://www.google.com",
+
+  "driver_location": "web_drivers",
+
+  "report_location": "test_reports"
+}

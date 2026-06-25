@@ -1,0 +1,8 @@
+*.pyc
+*.csv
+*.DS_Store
+userconf.py
+*.json
+!default.json
+.python-version
+configs/*

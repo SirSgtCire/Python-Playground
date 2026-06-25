@@ -1,0 +1,4 @@
+requests==2.12.4
+uritemplate==3.0.1
+github3.py==0.9.6
+pytz==2013.7
