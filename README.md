@@ -15,13 +15,14 @@ Fun environment for throwing Python code at the wall.
 2. when done using venv, run `deactivate`
 
 # Description of each existing Module:
-## GitAPI
+## AI Teaching
+AI Teaching is a scripting project used to launch AI generated scripts and provide feedback to AI models using results generated from the script itself.
 
+## GitAPI
+GitAPI is an extension of the Github API, providing statistical functions on available Github metrics. 
 
 ## Imaghur
-
-
-## PythonManuscripts
-
+Imaghur is a research project into image loading and manipulation, potentially a Rider Waite Tarot deck.
 
 ## QAS
+QAS is a collection of accumulated knowledge regarding effective testing strategies, including Selenium usage.
