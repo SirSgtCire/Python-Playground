@@ -1,4 +1,4 @@
-# Imaghur - Image Manipulation
+# AI Teaching Scripts
 
 ## Overview
 
