@@ -1,0 +1,11 @@
+SSH pw: learn
+SHA256:ZE79BtPBsLSX37fsMP9Joez7TukHwpmqzqy89c+iXxQ ericd75@uw.edu
+reset when beginning 320 and 330
+
+1. Grid Printer -
+
+
+2. Fizz Buzz -
+
+
+3. Fibonnacci -
