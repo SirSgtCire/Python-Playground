@@ -26,3 +26,6 @@ Imaghur is a research project into image loading and manipulation, potentially a
 
 ## QAS
 QAS is a collection of accumulated knowledge regarding effective testing strategies, including Selenium usage.
+
+## UW Certification
+UW Certification is the collection of coursework in one directory for obtaining a PYTHON certificate from University of Washington.
