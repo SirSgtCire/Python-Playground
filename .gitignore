@@ -135,6 +135,3 @@ Venvs
 # QAS Reports and Drivers
 QAS/test_reports/
 QAS/web_drivers/
-
-# UW Certification Homework directories
-UW Certification/PYTHON 310/py310-*
