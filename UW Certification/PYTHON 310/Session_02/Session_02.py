@@ -79,6 +79,9 @@ if __name__ == '__main__':
     greet_user(get_user_name())
 
 # Exceptions
-
+- typeerror
+- valueerror
+- nameerror
+- syntaxerror
 
 # Conditionals
